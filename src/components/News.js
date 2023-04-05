@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react'
 import NewsItem from './NewsItem'
 import Spinner from './Spinner'
 import PropTypes from 'prop-types'
-import InfiniteScroll from 'react-infinite-scroll-component'
 
 const News = (props) => {
 
@@ -38,6 +37,7 @@ const News = (props) => {
 
   const handlePreviousClick = async () => {
     setPage(page-1);
+    // eslint-disable-next-line
     updateNews()
   }
 
@@ -49,9 +49,9 @@ const News = (props) => {
   }
 
     // The function for infinite scroll that is used to fetch more data and concat it to the end results.
-
+  /*
    const fetchMoreData = async() => {
-    
+   
     const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page+1}&pageSize=${props.pageSize}`;
        setPage(page+1)
        let data = await fetch(url);
@@ -60,6 +60,7 @@ const News = (props) => {
        setArticles(parsedData.articles)
        setTotalResults(parsedData.totalResults)
   };
+  */
 
     return (
       <div>
