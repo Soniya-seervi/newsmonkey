@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import NewsItem from './NewsItem'
 import Spinner from './Spinner'
 import PropTypes from 'prop-types'
-import InfiniteScroll from 'react-infinite-scroll-component'
 
 export class News extends Component {
 
@@ -36,16 +35,21 @@ export class News extends Component {
   }
 
   async updateNews() {
-       const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=b94f9e30c81b41938bc8b32ef7137241&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+       this.props.setProgress(10)
+       const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page}&pageSize=${this.props.pageSize}`;
        this.setState({loading:true})
        let data = await fetch(url);
+       this.props.setProgress(30)
        let parsedData = await data.json();
+       this.props.setProgress(70)
        console.log(parsedData);
        this.setState({
          articles: parsedData.articles,
          loading: false,
          totalResults: parsedData.totalResults
        })
+
+       this.props.setProgress(100)
   }
 
   async componentDidMount(){
